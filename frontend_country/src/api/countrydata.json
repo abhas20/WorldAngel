@@ -1,0 +1,109 @@
+[
+    {
+      "id": 1,
+      "name": "Japan",
+      "capital": "Tokyo",
+      "population": 125800000,
+      "interesting_facts": [
+        "Japan is made up of over 6,800 islands.",
+        "The Japanese train system is known for its punctuality and speed.",
+        "Tokyo is the largest metropolitan area in the world by population.",
+        "Japan has the world's oldest continuous monarchy, dating back over 1,500 years."
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Brazil",
+      "capital": "Brasília",
+      "population": 213993437,
+      "interesting_facts": [
+        "Brazil is the largest country in South America by both area and population.",
+        "It is home to the Amazon Rainforest, which produces 20% of the world's oxygen.",
+        "Brazil has won the FIFA World Cup five times, the most by any country.",
+        "The official language of Brazil is Portuguese, unlike most other countries in South America."
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Egypt",
+      "capital": "Cairo",
+      "population": 104100000,
+      "interesting_facts": [
+        "Egypt is home to the ancient pyramids, one of the Seven Wonders of the Ancient World.",
+        "The Nile River, which flows through Egypt, is the longest river in the world.",
+        "Cairo is one of the largest cities in Africa and the Arab world.",
+        "Egypt has a rich history of civilization dating back over 5,000 years."
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Canada",
+      "capital": "Ottawa",
+      "population": 38008005,
+      "interesting_facts": [
+        "Canada has the longest coastline of any country in the world.",
+        "It is home to the second-largest land area in the world, after Russia.",
+        "Canada has two official languages: English and French.",
+        "It is known for its beautiful natural landscapes, including national parks and lakes."
+      ]
+    },
+    {
+        "id": 5,
+        "name": "Australia",
+        "capital": "Canberra",
+        "population": 25687041,
+        "interesting_facts": [
+          "Australia is the only country that is also a continent.",
+          "It is home to the Great Barrier Reef, the largest coral reef system in the world.",
+          "Australia has more than 10,000 beaches, more than any other country.",
+          "It is one of the driest inhabited continents on Earth, with much of its land being desert."
+        ]
+      },
+      {
+        "id": 6,
+        "name": "France",
+        "capital": "Paris",
+        "population": 67413000,
+        "interesting_facts": [
+          "France is known for its rich history, culture, and cuisine, especially wine and cheese.",
+          "The Eiffel Tower in Paris is one of the most visited paid monuments in the world.",
+          "France was the birthplace of the French Revolution in 1789.",
+          "It is the most visited country in the world with over 80 million tourists each year."
+        ]
+      },
+      {
+        "id": 7,
+        "name": "India",
+        "capital": "New Delhi",
+        "population": 1393409038,
+        "interesting_facts": [
+          "India is the world's largest democracy.",
+          "It is home to the Taj Mahal, one of the Seven Wonders of the World.",
+          "India has over 2,000 distinct languages and dialects.",
+          "Yoga, one of the world's most popular fitness practices, originated in India over 5,000 years ago."
+        ]
+      },
+      {
+        "id": 8,
+        "name": "South Africa",
+        "capital": "Pretoria (administrative), Bloemfontein (judicial), Cape Town (legislative)",
+        "population": 59308690,
+        "interesting_facts": [
+          "South Africa has three capital cities, each serving a different governmental purpose.",
+          "It is home to the famous Kruger National Park, one of Africa's largest game reserves.",
+          "South Africa is the only country to have hosted the FIFA World Cup on the African continent."
+        ]
+      },
+      {
+        "id": 9,
+        "name": "Mexico",
+        "capital": "Mexico City",
+        "population": 128933000,
+        "interesting_facts": [
+          "Mexico is home to one of the oldest civilizations in the Americas, the Aztecs.",
+          "It has the second-largest number of Spanish speakers in the world, after Spain.",
+          "Mexico has a rich cultural heritage, including mariachi music and vibrant festivals like Día de los Muertos.",
+          "Chichen Itza, one of the most famous ancient ruins, is located in Mexico."
+        ]
+      }
+  ]
