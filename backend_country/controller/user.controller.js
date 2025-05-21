@@ -75,7 +75,8 @@ const loginUser=asyncHandler(async (req,res)=>{
 
     const option={
         httpOnly:true,
-        secure:true
+        secure:true,
+        sameSite: "None", // REQUIRED for cross-site cookies
     }
     return res.status(200).cookie("accessToken",accessToken,option).cookie("refreshToken",refreshToken,option)
     .json(new ApiResponse(200,{user:loggedInUser,accessToken,refreshToken}, "User logged in successfully"))
@@ -97,7 +98,8 @@ const logoutUser=asyncHandler(async(req,res)=>{
     )
     const option={
         httpOnly:true,
-        secure:true
+        secure:true,
+        sameSite: "None", // REQUIRED for cross-site cookies
     }
     res.status(200).clearCookie("accessToken", option).clearCookie("refreshToken",option)
     .json(new ApiResponse(200,{},"User logged out successfully"))
