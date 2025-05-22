@@ -1,16 +1,16 @@
   [
     {
-        "icon":"Abhas",
+        "icon":"Call",
         "title":"Contact Us at:",
         "Detail":458645563
     },
     {
-        "icon":"Blast",
+        "icon":"Mail",
         "title":"Reach Us at:",
         "Detail":"roasteddragon@gmail.com"
     },
     {
-        "icon":"Ghost",
+        "icon":"Location",
         "title":"Find us at:",
         "Detail":"Tyfoon"
     }

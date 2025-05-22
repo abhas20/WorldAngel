@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { TfiAngleDoubleDown } from "react-icons/tfi";
 import useAuth from '../../auth/hooks/useAuth';
@@ -34,9 +34,13 @@ export default function Headers() {
   }
 
   return (
-    <div className='mx-auto row-auto bg-[#1f1f1f] text-white'>
+    <div className='mx-2 rounded-2xl row-auto bg-[#1f1f1f] text-white'>
       <div className='container h-20 m-auto grid items-center grid-cols-3 '>
-      <h1 className='text-3xl tracking-widest p-2 font-[Rog] col-span-3 '>Explore <span className='text-yellow-300'>The</span> WORLD</h1>
+      <h1 className='text-3xl tracking-widest p-2 font-[Rog] col-span-3 text-center sm:text-left'>
+  Explore <br className='block sm:hidden' />
+  <span className='text-yellow-300'>The</span> WORLD
+</h1>
+
       <ul className={' justify-evenly col-end-5 [&_li]:p-2.5 sm:flex hidden'}>
         <NavLink to="/"><li className='hover:underline underline-offset-2 hover:text-amber-500 '>Home</li></NavLink>
         <NavLink to="/about"><li className='hover:underline underline-offset-2 hover:text-amber-500 '>About</li></NavLink>
@@ -52,7 +56,7 @@ export default function Headers() {
         </button>
       </div>
       {show && <div className='absolute top-20 right-0 w-full text-center  p-2 sm:hidden'>
-        <ul className='bg-[#1f1f1f] text-white p-2.5 shadow shadow-amber-300 [&_li]:p-2.5'>
+        <ul className='bg-[#1f1f1f] text-white p-2.5 shadow shadow-amber-300 [&_li]:p-2.5' onClick={handleButtonToggle}>
         <NavLink to="/"><li className='hover:underline underline-offset-2 hover:text-amber-500 '>Home</li></NavLink>
         <NavLink to="/about"><li className='hover:underline underline-offset-2 hover:text-amber-500 '>About</li></NavLink>
         <NavLink to="/country"><li className='hover:underline underline-offset-2 hover:text-amber-500 '>Country</li></NavLink>
