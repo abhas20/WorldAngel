@@ -43,7 +43,7 @@ const createUser= asyncHandler(async (req,res)=>{
     }
 
     const user=await userSignUp.create({
-        username:username.toLowerCase(),
+        username:username,
         email,
         password,
         avatar:avatar?.url || "https://res.cloudinary.com/ds6lixr1g/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1745775700/samples/smile.jpg"
@@ -155,16 +155,16 @@ const changePassword=asyncHandler(async (req,res)=>{
 // --Change Photo---//
 
 const updateUserAvatar=asyncHandler(async (req,res)=>{
-    const localPath=req.file?.path;
-    if(!localPath) throw new ApiError(401,"Avatar file is missing")
+    const buffer = req.file?.buffer;
+    if(!buffer) throw new ApiError(401,"Avatar file is missing")
 
-    const newAvatar= await uploadOnCloudinary(localPath);
-    if(!newAvatar?.url) throw new ApiError(401,"Error in uploading the file ");
+    const newAvatar= await uploadOnCloudinary(buffer);
+    if(!newAvatar?.url && !newAvatar?.secure_url) throw new ApiError(401,"Error in uploading the file ");
     const user=await userSignUp.findById(req.user?._id).select("-password -refreshToken")
     if (!user) {
         throw new ApiError(404, "User not found");
     }
-    user.avatar=newAvatar?.url;
+    user.avatar=newAvatar?.url || !newAvatar?.secure_url;
     await user.save();
 
     return res.status(200).json(new ApiResponse(200,user,"Updated Successfully"));
