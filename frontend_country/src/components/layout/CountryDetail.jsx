@@ -45,7 +45,7 @@ export default function CountryDetail() {
                   );
                   })}</p>
                 <p><span className='font-bold text-gray-300'>Languages: </span>{Object.keys(country.languages).map((key)=>country.languages[key]).join(" ,")}</p>
-                <p><span className='font-bold text-gray-300'>Location: </span>{country.maps.googleMaps}</p>
+                <p><span className='font-bold text-gray-300'>Location: </span><NavLink to={country.maps.googleMaps}>{country.maps.googleMaps}</NavLink></p>
                 <NavLink to={"/country"}><button className='border-2 font-bold absolute right-10 text-black bg-white border-blue-600 p-1.5 rounded-2xl'>Go Back</button></NavLink>
                 </div>
                 </div>

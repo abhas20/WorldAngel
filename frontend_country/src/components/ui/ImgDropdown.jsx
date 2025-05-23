@@ -34,7 +34,7 @@ export default function ImgDropdown({logoutUser}) {
           {open && (
             <ul className="absolute right-0 mt-2 w-40 bg-black  rounded shadow-md z-50">
               <li className="flex justify-end cursor-pointer" onClick={handleAvatarClick}><IoIosClose/></li>
-              <NavLink to="/profile"><li className="px-4 py-2 hover:underline underline-offset-2 hover:text-amber-500 cursor-pointer">
+              <NavLink to="/profile" onClick={handleAvatarClick}><li className="px-4 py-2 hover:underline underline-offset-2 hover:text-amber-500 cursor-pointer">
                 Profile
               </li>
               </NavLink>
