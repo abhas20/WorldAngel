@@ -28,13 +28,13 @@ export const login=async(data)=>{
 }
 
 export const logout=async()=>{
-    const loggedoutUser=await api.post("/logout",{headers:{
+    const loggedoutUser=await api.post("/logout",null,{headers:{
         "Content-Type":"application/json"
     }})
     return loggedoutUser;
 }
 
 export const refreshToken=async()=>{
-    const response=await api.post("/refresh-token",{},{withCredentials:true})
+    const response=await api.post("/refresh-token",null,{withCredentials:true})
     return response;
 }
