@@ -28,7 +28,7 @@ export const login=async(data)=>{
 }
 
 export const logout=async()=>{
-    const loggedoutUser=await api.post("/logout",null,{headers:{
+    const loggedoutUser=await api.post("/logout",{headers:{
         "Content-Type":"application/json"
     }})
     return loggedoutUser;

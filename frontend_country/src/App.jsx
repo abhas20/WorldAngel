@@ -20,30 +20,24 @@ import ChangePassword from './pages/ChangePassword'
 const router=createBrowserRouter([
 
   {
-    element: <PersistentLayount/>, 
-    children: [
+    element:<AppLayout/>,
+    errorElement:<ErrorPage/>,
+    children:[
+      { index: true, element: <Home /> },
+      { path: 'about', element: <About /> },
+      { path: 'contact', element: <Contact /> },
+      { path: 'login', element: <Login /> },
+      { path: 'signup', element: <Signup /> },
+
+      // Protected Routes
       {
-        path: '/',
-        element: <AppLayout />,
+        element: <ProtectedLayout />,
         errorElement: <ErrorPage />,
         children: [
-          // Public Routes
-          { path:'/', element: <Home/> },
-          { path:'about', element: <About/> },
-          { path:'contact', element: <Contact/> },
-          { path:'login', element: <Login/> },
-          { path:'signup', element: <Signup/> },
-
-          // Protected Routes
-          {
-            element: <ProtectedLayout/>, 
-            children: [
-              { path: 'country', element: <Country/> },
-              { path: 'country/:id', element: <CountryDetail/> },
-              { path: 'profile', element: <Profile/> },
-              { path: 'change-password', element: <ChangePassword/> },
-            ]
-          }
+          { path: 'country', element: <Country /> },
+          { path: 'country/:id', element: <CountryDetail /> },
+          { path: 'profile', element: <Profile /> },
+          { path: 'change-password', element: <ChangePassword /> },
         ]
       }
     ]

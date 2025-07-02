@@ -22,9 +22,13 @@ export default function Signup() {
 
   const formSubmit=async (formData)=>{
     try {
-      console.log(formData.entries())
       const filled =Object.fromEntries(formData.entries())
-      const data=await registerUser(filled);
+      if(filled.password!==filled.confirm_password){
+        toast.error("Confirm password and password must be same")
+        return;
+      }
+      console.log(filled)
+      const data=await registerUser({username:filled.username,email:filled.email,password:filled.password});
       setLoading(true);
       if(data.status==201){navigate("/login");
       toast.success("Signed Up Successfully")
@@ -67,6 +71,14 @@ export default function Signup() {
           type="password"
           name="password"
           placeholder="Password"
+          className="w-full border border-gray-300 p-3 rounded-md"
+          required
+          autoComplete="off"
+        />
+        <input
+          type="password"
+          name="confirm_password"
+          placeholder="Confirm Password"
           className="w-full border border-gray-300 p-3 rounded-md"
           required
           autoComplete="off"

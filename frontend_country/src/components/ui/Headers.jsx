@@ -15,7 +15,7 @@ export default function Headers() {
     setShow(!show);
     console.log("clicked")
   }
-  const {auth,setAuth}=useAuth()
+  const {auth,setAuth,authLoading}=useAuth()
   
 
   const logoutUser=async ()=>{
@@ -46,7 +46,8 @@ export default function Headers() {
         <NavLink to="/about"><li className='hover:underline underline-offset-2 hover:text-amber-500 '>About</li></NavLink>
         <NavLink to="/country"><li className='hover:underline underline-offset-2 hover:text-amber-500 '>Country</li></NavLink>
         <NavLink to="/contact"><li className='hover:underline underline-offset-2 hover:text-amber-500 '>Contact</li></NavLink>
-        {auth.accessToken?
+        {authLoading?<li className='text-amber-500'>Loading...</li>:
+        auth.accessToken?
         <ImgDropdown logoutUser={logoutUser}/>
         :<NavLink to="/login"><li className='hover:underline underline-offset-2 hover:text-amber-500 '>Login</li></NavLink>}
       </ul>
@@ -62,7 +63,8 @@ export default function Headers() {
         <NavLink to="/country"><li className='hover:underline underline-offset-2 hover:text-amber-500 '>Country</li></NavLink>
         <NavLink to="/contact"><li className='hover:underline underline-offset-2 hover:text-amber-500 '>Contact</li></NavLink>
 
-        {auth.accessToken?
+        {authLoading?<li className='text-amber-500'>Loading...</li>:
+        auth.accessToken?
         <>
         <NavLink to="/profile"><li className='hover:underline underline-offset-2 hover:text-amber-500'>Profile</li></NavLink>
         <button onClick={logoutUser}><li className='hover:underline underline-offset-2 hover:text-amber-500 '>Logout</li></button>
