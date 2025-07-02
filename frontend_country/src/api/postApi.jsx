@@ -5,7 +5,7 @@ const api=axios.create({
 })
 
 export const getData=()=>{
-    return api.get("all")
+    return api.get("all?fields=flags,name,population,region,car,area,capital")
 }
 
 export const getIndData=(country)=>{
