@@ -122,10 +122,12 @@ const refreshAccessToken=asyncHandler(async (req,res)=>{
                 sameSite: "None", // REQUIRED for cross-site cookies
             }
         const {accessToken,refreshToken:newrefreshToken}=await generateAccessTokenAndRefreshToken(user._id)
+        
         return res.status(200).cookie("accessToken",accessToken,option).cookie("refreshToken",newrefreshToken,option)
         .json(new ApiResponse(200,{accessToken,refreshToken:newrefreshToken}, "Access token refreshed"))
         
     } catch (error) {
+        console.log(error)
         throw new ApiError(error?.message || "Error occured in renewing refreshToken")
     }
 })

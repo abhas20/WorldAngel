@@ -17,7 +17,7 @@ const ChangePassword = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      await axiosPrivate.post('/change-password', form);
+      await axiosPrivate.post('/user/change-password', form);
       toast.success("Password changed successfully!")
       console.log('Password changed successfully!');
       setForm({ currentPassword: '', newPassword: '' })

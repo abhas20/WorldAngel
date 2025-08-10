@@ -22,7 +22,7 @@ const handleImageUpload = async () => {
     const formData=new FormData()
     formData.append("avatar",avatar.avatar);
 
-    const res=await axiosPrivate.patch("/update-avatar",formData,{
+    const res=await axiosPrivate.patch("/user/update-avatar",formData,{
       headers:{
         "Content-Type":"multipart/form-data"
       }

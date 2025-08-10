@@ -15,7 +15,7 @@ export function AuthProvider({ children }) {
 
   const fetchUser = async () => {
     try {
-      const res = await axiosPrivate.get("/current-user");
+      const res = await axiosPrivate.get("/user/current-user");
       if (res.status === 200 && res.data?.message) {
         setAuth((prev) => ({
           ...prev,
