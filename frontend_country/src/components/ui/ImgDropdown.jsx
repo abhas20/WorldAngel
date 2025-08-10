@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { IoIosClose } from "react-icons/io";
 import { NavLink } from "react-router-dom";
 import useAuth from "../../auth/hooks/useAuth";
+import { FaRegMessage } from "react-icons/fa6";
 
 
 export default function ImgDropdown({logoutUser}) {
@@ -23,9 +24,9 @@ export default function ImgDropdown({logoutUser}) {
 
   return (
     <div className="relative">
-      {user &&(
-      <div>
-        <img
+      {user && (
+        <div>
+          <img
             src={user.avatar}
             alt="Profile"
             onClick={handleAvatarClick}
@@ -33,19 +34,30 @@ export default function ImgDropdown({logoutUser}) {
           />
           {open && (
             <ul className="absolute right-0 mt-2 w-40 bg-black  rounded shadow-md z-50">
-              <li className="flex justify-end cursor-pointer" onClick={handleAvatarClick}><IoIosClose/></li>
-              <NavLink to="/profile" onClick={handleAvatarClick}><li className="px-4 py-2 hover:underline underline-offset-2 hover:text-amber-500 cursor-pointer">
-                Profile
+              <li
+                className="flex justify-end cursor-pointer"
+                onClick={handleAvatarClick}>
+                <IoIosClose />
+              </li>
+              <NavLink to="/profile" onClick={handleAvatarClick}>
+                <li className="px-4 py-2 hover:underline underline-offset-2 hover:text-amber-500 cursor-pointer">
+                  Profile
+                </li>
+              </NavLink>
+              <NavLink to="/chat">
+              <li onClick={handleAvatarClick} className="px-4 py-2 hover:underline underline-offset-2 hover:text-amber-500 cursor-pointer">
+                    Global Chat
               </li>
               </NavLink>
-              <li onClick={handleLogout} className="px-4 py-2 hover:underline underline-offset-2 hover:text-amber-500 cursor-pointer">
+              <li
+                onClick={handleLogout}
+                className="px-4 py-2 hover:underline underline-offset-2 hover:text-amber-500 cursor-pointer">
                 Logout
               </li>
             </ul>
           )}
-      </div>
+        </div>
       )}
-      
     </div>
-  )
+  );
 }

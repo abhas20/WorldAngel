@@ -5,6 +5,7 @@ import useAuth from '../../auth/hooks/useAuth';
 import { toast } from 'react-toastify';
 import { logout, refreshToken } from '../../api/authApi';
 import ImgDropdown from './ImgDropdown';
+import { FaRegMessage } from 'react-icons/fa6';
 
 
 export default function Headers() {
@@ -61,6 +62,7 @@ export default function Headers() {
         <NavLink to="/"><li className='hover:underline underline-offset-2 hover:text-amber-500 '>Home</li></NavLink>
         <NavLink to="/about"><li className='hover:underline underline-offset-2 hover:text-amber-500 '>About</li></NavLink>
         <NavLink to="/country"><li className='hover:underline underline-offset-2 hover:text-amber-500 '>Country</li></NavLink>
+        <NavLink to="/chat"><li className='hover:underline underline-offset-2 hover:text-amber-500 '>Global Chat</li></NavLink>
         <NavLink to="/contact"><li className='hover:underline underline-offset-2 hover:text-amber-500 '>Contact</li></NavLink>
 
         {authLoading?<li className='text-amber-500'>Loading...</li>:

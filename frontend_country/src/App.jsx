@@ -14,7 +14,9 @@ import ProtectedLayout from './components/layout/ProtectedLayout'
 import { AuthProvider } from './auth/context/AuthProvider'
 import PersistentLayount from './components/layout/PersistentLayount'
 import ChangePassword from './pages/ChangePassword'
-
+import { useEffect } from 'react'
+import socket from './chat/socket'
+import Chat from './pages/Chat'
 
 
 const router=createBrowserRouter([
@@ -28,6 +30,7 @@ const router=createBrowserRouter([
       { path: 'contact', element: <Contact /> },
       { path: 'login', element: <Login /> },
       { path: 'signup', element: <Signup /> },
+      { path: 'chat', element:<Chat/>},
 
       // Protected Routes
       {
@@ -46,6 +49,28 @@ const router=createBrowserRouter([
 ])
 
 function App() {
+
+  useEffect(()=>{
+    socket.on("connect", () => {
+      console.log("Connected to socket server",socket.id);
+    });
+    socket.on("disconnect", () => {
+      console.log("Disconnected from socket server");
+    });
+    socket.on("connect_error", (err) => {
+      console.error("Socket connection error:", err);
+    }
+    );
+
+
+    return ()=>{
+      socket.off("connect");
+      socket.off("disconnect");
+      socket.off("connect_error");
+    }
+
+  },[])
+
 
   return(
     <RouterProvider router={router}></RouterProvider>

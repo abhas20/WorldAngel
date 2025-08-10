@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify'
 import { AuthProvider } from './auth/context/AuthProvider.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  <>
    <AuthProvider>
     <ToastContainer
     position="top-right"
@@ -21,5 +21,5 @@ createRoot(document.getElementById('root')).render(
     theme="light"/>
     <App />
     </AuthProvider>
-  </StrictMode>,
+  </>,
 )
