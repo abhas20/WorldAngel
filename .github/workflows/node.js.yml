@@ -17,17 +17,24 @@ jobs:
     steps:
       - name:  Checkout repository
         uses: actions/checkout@v4
-
-      - name: ⎔ Setup Node.js
+      - name: Set up Node.js for backend
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+          cache-dependency-path: backend_country/package-lock.json
 
       #  Install backend dependencies
       - name: 📦 Install backend dependencies
         working-directory: ./backend_country
         run: npm ci
+        
+      - name: Set up Node.js for frontend
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: frontend_country/package-lock.json
 
       #  Install frontend dependencies
       - name: 📦 Install frontend dependencies
