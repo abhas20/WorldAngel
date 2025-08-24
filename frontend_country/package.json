@@ -1,13 +1,22 @@
 {
-  "name": "country",
+  "name": "worldangel-frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Frontend React app for WorldAngel - Explore countries and chat with users worldwide",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "setup": "npm install && echo 'Please create .env file from .env.example'"
+  },
+  "keywords": ["worldangel", "react", "vite", "countries", "chat", "frontend"],
+  "author": "abhas20",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abhas20/WorldAngel.git"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.0.3",

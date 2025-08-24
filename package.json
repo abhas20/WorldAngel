@@ -1,0 +1,39 @@
+{
+  "name": "worldangel",
+  "version": "1.0.0",
+  "description": "A full-stack application to explore countries and chat with users worldwide",
+  "private": true,
+  "scripts": {
+    "install-all": "npm run install-backend && npm run install-frontend",
+    "install-backend": "cd backend_country && npm install",
+    "install-frontend": "cd frontend_country && npm install",
+    "dev": "concurrently \"npm run dev-backend\" \"npm run dev-frontend\"",
+    "dev-backend": "cd backend_country && npm run dev",
+    "dev-frontend": "cd frontend_country && npm run dev",
+    "build": "npm run build-frontend",
+    "build-frontend": "cd frontend_country && npm run build",
+    "start": "npm run start-backend",
+    "start-backend": "cd backend_country && npm start",
+    "setup": "npm run install-all && echo '\n✨ Setup complete! Please configure your .env files in both backend_country and frontend_country directories.\n\nNext steps:\n1. Copy .env.example to .env in both directories\n2. Configure your environment variables\n3. Run: npm run dev\n'"
+  },
+  "keywords": [
+    "worldangel",
+    "countries",
+    "chat",
+    "react",
+    "nodejs",
+    "mongodb",
+    "socketio",
+    "full-stack"
+  ],
+  "author": "abhas20",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abhas20/WorldAngel.git"
+  },
+  "homepage": "https://github.com/abhas20/WorldAngel#readme",
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
