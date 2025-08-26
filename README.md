@@ -107,7 +107,7 @@ Create a `.env` file in the `backend_country` directory with the following varia
 # Database Configuration
 DB_URL=mongodb://localhost:27017/
 # OR for MongoDB Atlas:
-# DB_URL=mongodb+srv://username:password@cluster.mongodb.net/
+# DB_URL=your_atlas_url
 DB_NAME=worldangel
 
 # JWT Configuration
