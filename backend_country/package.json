@@ -1,16 +1,22 @@
 {
-  "name": "backend_country",
+  "name": "worldangel-backend",
   "version": "1.0.0",
-  "description": "backend for country project",
+  "description": "Backend API for WorldAngel - A platform to explore countries and chat with users worldwide",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "setup": "npm install && echo 'Please create .env file from .env.example'"
   },
-  "author": "",
+  "keywords": ["worldangel", "countries", "chat", "api", "nodejs", "express", "mongodb", "socketio"],
+  "author": "abhas20",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abhas20/WorldAngel.git"
+  },
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cloudinary": "^2.6.0",
