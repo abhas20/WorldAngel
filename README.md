@@ -349,13 +349,5 @@ This project is licensed under the ISC License.
 
 - GitHub: [@abhas20](https://github.com/abhas20)
 
-## 🙏 Acknowledgments
-
-- [REST Countries API](https://restcountries.com/) for providing country data
-- [Cloudinary](https://cloudinary.com/) for image storage and processing
-- [MongoDB Atlas](https://www.mongodb.com/atlas) for database hosting
-- React and Node.js communities for excellent documentation and support
-
----
 
 ⭐ If you found this project helpful, please give it a star on GitHub!

@@ -76,9 +76,4 @@ WorldAngel/
 4. Check console for errors
 5. Commit and push changes
 
-## Useful Development Links
-
-- REST Countries API: https://restcountries.com/v3.1/all
-- Cloudinary Dashboard: https://cloudinary.com/console
-- MongoDB Atlas: https://cloud.mongodb.com/
-- Socket.io Docs: https://socket.io/docs/
+### THANK YOU FOR YOUR SUPPORT
