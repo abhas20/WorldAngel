@@ -43,15 +43,17 @@ jobs:
         working-directory: ./frontend_country
         run: npm run build
 
-      # Check Docker Compose build
-      - name: 🧪 Run Docker Compose containers
-        run: docker compose -f docker-compose.yml up --build -d --abort-on-container-exit
+      # ✅ Verify Docker Compose setup builds and runs
+      - name: 🐳 Build Docker Compose services
+        run: docker compose -f docker-compose.yml build
 
-        # Verify that containers are running
+      - name: 🧪 Run Docker Compose containers
+        run: docker compose -f docker-compose.yml up -d
+
       - name: ✅ Verify containers are running
         run: docker compose -f docker-compose.yml ps
 
-      # Tear down Docker Compose containers
       - name: 🧼 Tear down Docker Compose containers
         if: always()
         run: docker compose -f docker-compose.yml down
+
