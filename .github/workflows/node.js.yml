@@ -43,6 +43,12 @@ jobs:
         working-directory: ./frontend_country
         run: npm run build
 
+      # Ensure .env files 
+      - name: 🧩 Ensure env files exist
+        run: |
+          touch backend_country/.env
+          touch frontend_country/.env
+
       # ✅ Verify Docker Compose setup builds and runs
       - name: 🐳 Build Docker Compose services
         run: docker compose -f docker-compose.yml build
