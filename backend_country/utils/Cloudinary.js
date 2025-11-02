@@ -58,7 +58,7 @@ dotenv.config({
           }
         );
 
-        streamifier.createReadStream(input).pipe(stream);
+        streamifier.createReadStream(input).pipe(stream); // we are piping the buffer data to cloudinary
       });
 
     const bufferUpload = await streamUpload();

@@ -1,0 +1,22 @@
+version: '1.1'
+
+services:
+  backend_country:
+    build: 
+      context: ./backend_country
+    container_name: backend_country
+    ports:
+    - "8080:8080"
+    env_file:
+      - ./backend_country/.env
+
+  frontend_country:
+    build:
+      context: ./frontend_country
+    container_name: frontend_country
+    ports:
+      - "5173:5173"
+    env_file:
+      - ./frontend_country/.env
+    depends_on:
+      - backend_country

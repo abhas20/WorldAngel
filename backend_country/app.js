@@ -9,7 +9,7 @@ app.use(cors({
     origin:["http://localhost:5173","https://world-angel.vercel.app"],
     credentials:true
 }))
-app.use(express.urlencoded({extended:true})); // for parsing application/x-www-form-urlencoded
+app.use(express.urlencoded({extended:true})); // for parsing application/x-www-form-urlencoded //extended: true allows nested objects
 app.use(cookieParser()); 
 
 
