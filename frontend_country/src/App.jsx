@@ -17,36 +17,41 @@ import ChangePassword from './pages/ChangePassword'
 import { useEffect } from 'react'
 import socket from './chat/socket'
 import Chat from './pages/Chat'
+import GuestLayout from './components/layout/GuestLayout'
 
 
-const router=createBrowserRouter([
-
+const router = createBrowserRouter([
   {
-    element:<AppLayout/>,
-    errorElement:<ErrorPage/>,
-    children:[
+    element: <AppLayout />,
+    errorElement: <ErrorPage />,
+    children: [
       { index: true, element: <Home /> },
-      { path: 'about', element: <About /> },
-      { path: 'contact', element: <Contact /> },
-      { path: 'login', element: <Login /> },
-      { path: 'signup', element: <Signup /> },
-      { path: 'chat', element:<Chat/>},
+      { path: "about", element: <About /> },
+      { path: "contact", element: <Contact /> },
+      { path: "chat", element: <Chat /> },
+
+      {
+        element: <GuestLayout />,
+        children: [
+          { path: "login", element: <Login /> },
+          { path: "signup", element: <Signup /> },
+        ],
+      },
 
       // Protected Routes
       {
         element: <ProtectedLayout />,
         errorElement: <ErrorPage />,
         children: [
-          { path: 'country', element: <Country /> },
-          { path: 'country/:id', element: <CountryDetail /> },
-          { path: 'profile', element: <Profile /> },
-          { path: 'change-password', element: <ChangePassword /> },
-        ]
-      }
-    ]
-}
-  
-])
+          { path: "country", element: <Country /> },
+          { path: "country/:id", element: <CountryDetail /> },
+          { path: "profile", element: <Profile /> },
+          { path: "change-password", element: <ChangePassword /> },
+        ],
+      },
+    ],
+  },
+]);
 
 function App() {
 

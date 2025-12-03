@@ -13,7 +13,7 @@ export default function Country() {
   useEffect(()=>{
     startTrasition(async()=>{
       const res=await getData();
-      console.log(res.data)
+      // console.log(res.data)
       setCountry(res.data)
     })
   },[])

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import socket from "../../chat/socket";
 import { sendMessage } from "../../api/chatApi";
+import { FiSend, FiPaperclip } from "react-icons/fi";
 
 function InputMessage({ selectedRoom, user, setMessages }) {
   const [message, setMessage] = useState("");
@@ -27,7 +28,6 @@ function InputMessage({ selectedRoom, user, setMessages }) {
 
     socket.emit("join_room_socket", roomName);
 
-    // make sure we don't attach handler multiple times
     socket.off("message", handleNewMessage);
     socket.on("message", handleNewMessage);
 
@@ -38,8 +38,9 @@ function InputMessage({ selectedRoom, user, setMessages }) {
   }, [selectedRoom?.roomName, setMessages]);
 
   const handleFileChange = (e) => {
-    const f = e.target.files?.[0] ?? null; 
+    const f = e.target.files?.[0] ?? null;
     setFile(f);
+    if (f) toast.info(`Selected: ${f.name}`);
   };
 
   const resetFileInput = () => {
@@ -49,46 +50,39 @@ function InputMessage({ selectedRoom, user, setMessages }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!selectedRoom?.roomName) {
-      toast.error("Please select a room first.");
+    if (!message.trim() && !file) {
+      toast.error("Enter a message or select a file");
       return;
     }
-    if (!message.trim() && !file) {
-      toast.error("Please enter a message or attach a file");
+    if (!selectedRoom?.roomName) {
+      toast.error("Select a room first");
       return;
     }
 
-    const formData = new FormData();
-    formData.append("content", message);
-    formData.append("room_name", selectedRoom.roomName);
-    if (file) formData.append("attachments", file);
+    const fd = new FormData();
+    fd.append("content", message);
+    fd.append("room_name", selectedRoom.roomName);
+    if (file) fd.append("attachments", file);
 
     try {
       setLoading(true);
-      const res = await sendMessage(formData);
+      const res = await sendMessage(fd);
+      const sent = res?.data?.data?.message;
 
-      const sentMessage =
-        res?.data?.data?.message;
-
-      if (sentMessage) {
-        //avoid duplicate because of socket
+      if (sent) {
         setMessages((prev) => {
-          const id = sentMessage._id ?? sentMessage.id;
+          const id = sent._id ?? sent.id;
           if (id && prev.some((m) => String(m._id ?? m.id) === String(id))) {
             return prev;
           }
-          return [...prev, sentMessage];
+          return [...prev, sent];
         });
-
-
-        toast.success("Message sent!");
         setMessage("");
         resetFileInput();
       } else {
         toast.error("Failed to send message");
       }
-    } catch (error) {
-      console.error("Send message error:", error);
+    } catch (err) {
       toast.error("Error sending message");
     } finally {
       setLoading(false);
@@ -98,27 +92,67 @@ function InputMessage({ selectedRoom, user, setMessages }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex items-center gap-2 p-4 bg-gray-900 border-t border-gray-700">
+      className="
+        flex flex-col sm:flex-row items-center gap-2 
+        px-3 sm:px-4 py-3 
+        bg-gray-900 border-t border-gray-700
+      ">
+      {/* Text Input */}
       <input
         type="text"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         placeholder="Type your message..."
-        className="flex-grow px-4 py-2 rounded bg-gray-800 text-white focus:outline-none"
+        className="
+          w-full sm:flex-grow 
+          px-4 py-2 
+          rounded bg-gray-800 text-white 
+          focus:outline-none focus:ring-2 focus:ring-indigo-500
+        "
         disabled={loading}
       />
+
+      {/* Hidden file input */}
       <input
         ref={fileInputRef}
         type="file"
+        className="hidden"
         onChange={handleFileChange}
-        className="text-white"
         disabled={loading}
       />
+
+      {/* Upload button */}
+      <button
+        type="button"
+        onClick={() => fileInputRef.current?.click()}
+        className="
+          flex items-center justify-center 
+          p-2 sm:p-3 rounded bg-gray-700 text-white
+          hover:bg-gray-600 transition 
+          w-full sm:w-auto
+        "
+        disabled={loading}>
+        <FiPaperclip size={20} />
+      </button>
+
+      {/* Send button */}
       <button
         type="submit"
         disabled={loading}
-        className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded disabled:opacity-60">
-        {loading ? "Sending..." : "Send"}
+        className="
+          flex items-center justify-center gap-1 
+          px-4 py-2 rounded 
+          bg-indigo-600 hover:bg-indigo-500 
+          text-white transition 
+          disabled:opacity-50 w-full sm:w-auto
+        ">
+        {loading ? (
+          "Sending..."
+        ) : (
+          <>
+            <FiSend size={18} /> Send
+          </>
+        )}
       </button>
     </form>
   );

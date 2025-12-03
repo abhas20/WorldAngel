@@ -57,7 +57,7 @@ export default function Headers() {
         <TfiAngleDoubleDown />
         </button>
       </div>
-      {show && <div className='absolute top-20 right-0 w-full text-center  p-2 sm:hidden'>
+      {show && <div className='absolute top-20 right-0 w-full text-center z-10  p-2 sm:hidden'>
         <ul className='bg-[#1f1f1f] text-white p-2.5 shadow shadow-amber-300 [&_li]:p-2.5' onClick={handleButtonToggle}>
         <NavLink to="/"><li className='hover:underline underline-offset-2 hover:text-amber-500 '>Home</li></NavLink>
         <NavLink to="/about"><li className='hover:underline underline-offset-2 hover:text-amber-500 '>About</li></NavLink>

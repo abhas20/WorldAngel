@@ -1,9 +1,14 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { getAllRooms } from '../../api/chatApi';
-import socket from '../../chat/socket';
-import { toast } from 'react-toastify';
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { getAllRooms } from "../../api/chatApi";
+import socket from "../../chat/socket";
+import { toast } from "react-toastify";
 
-function SideBar({ selectedRoomName, setSelectedRoomName }) {
+function SideBar({
+  selectedRoomName,
+  setSelectedRoomName,
+  isOpen,
+  toggleSidebar,
+}) {
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -14,20 +19,16 @@ function SideBar({ selectedRoomName, setSelectedRoomName }) {
     setLoading(true);
     try {
       const response = await getAllRooms();
-      // defensive extraction of rooms array
-      // console.log("Fetched rooms:", response);
       const roomsData = Array.isArray(response?.data?.data?.rooms)
-        ? response.data.data.rooms: [];
+        ? response.data.data.rooms
+        : [];
 
-      const sorted = [...roomsData].sort((a, b) => {
-        const ta = new Date(a?.createdAt || 0).getTime();
-        const tb = new Date(b?.createdAt || 0).getTime();
-        return tb - ta; 
-      });
+      const sorted = roomsData.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
 
       setRooms(sorted);
 
-      // Auto-select last room if none selected (here we choose the first of sorted = newest)
       if (
         initialLoadRef.current &&
         !userClearedSelectionRef.current &&
@@ -40,21 +41,18 @@ function SideBar({ selectedRoomName, setSelectedRoomName }) {
           roomId: first._id ?? first.id,
           participants: first.participants ?? [],
         });
-        initialLoadRef.current = false; // don't auto-select again
+        initialLoadRef.current = false;
       }
-    } 
-    catch (error) {
-      console.error("Error fetching rooms:", error);
+    } catch (error) {
       toast.error("Failed to fetch rooms");
     } finally {
       setLoading(false);
     }
-  }, [setSelectedRoomName, selectedRoomName]);
+  }, [selectedRoomName, setSelectedRoomName]);
 
   useEffect(() => {
     fetchRooms();
 
-    // Socket listeners for real-time updates
     socket.on("room_created", fetchRooms);
     socket.on("user_joined", fetchRooms);
 
@@ -67,42 +65,72 @@ function SideBar({ selectedRoomName, setSelectedRoomName }) {
   const onRoomSelect = (room) => {
     setSelectedRoomName({
       roomName: room.roomName,
-      roomId: room._id ?? room.id,
+      roomId: room._id,
       participants: room.participants ?? [],
     });
+    toggleSidebar(false); // close after selecting
   };
 
   return (
-    <aside className="w-64 bg-gray-800 shadow-md h-screen overflow-y-auto p-4 border-r border-gray-200">
-      <h2 className="text-xl text-yellow-500 font-semibold mb-4">Available Rooms</h2>
-      {loading ? <p className="text-white">Loading rooms...</p> : (
-        <ul className="space-y-2">
-          <button className='bg-yellow-500 text-white px-4 py-2 rounded p-auto' onClick={() => setSelectedRoomName(null)}>
-            Join/Create Room
-          </button>
-          {rooms.length === 0 ? (
-            <li className="text-white">No rooms found.</li>
-          ) : (
-            rooms.map((room) => (
-              <li
-                key={room._id}
-                onClick={() => onRoomSelect(room)}
-                className={`cursor-pointer px-4 py-2 rounded hover:bg-blue-400 ${
-                  selectedRoomName?.roomName === room?.roomName ? "bg-blue-500 text-white" : ""
-                }`}
-              >
-                <>
-                  <strong>{room.roomName}</strong>
-                  <span className="text-sm text-white ml-2">
-                    ({room.participants?.length || 0} users)
-                  </span>
-                </>
-              </li>
-            ))
-          )}
-        </ul>
+    <>
+      {/* Overlay - show on all screens */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40"
+          onClick={() => toggleSidebar(false)}
+        />
       )}
-    </aside>
+
+      <aside
+        className={`
+          fixed top-0 left-0 h-full w-64 
+          bg-gray-800 shadow-md border-r border-gray-600
+          transform transition-transform duration-300 ease-in-out
+          z-50
+          ${isOpen ? "translate-x-0" : "-translate-x-full"}
+        `}>
+        <div className="p-4">
+          <h2 className="text-xl text-yellow-500 font-semibold mb-4">
+            Available Rooms
+          </h2>
+
+          {loading ? (
+            <p className="text-white">Loading rooms...</p>
+          ) : (
+            <ul className="space-y-2">
+              <button
+                className="bg-yellow-500 text-white px-4 py-2 rounded mb-2"
+                onClick={() => {
+                  setSelectedRoomName(null);
+                  toggleSidebar(false);
+                }}>
+                Join/Create Room
+              </button>
+
+              {rooms.length === 0 ? (
+                <li className="text-white">No rooms found.</li>
+              ) : (
+                rooms.map((room) => (
+                  <li
+                    key={room._id}
+                    onClick={() => onRoomSelect(room)}
+                    className={`cursor-pointer px-4 py-2 rounded hover:bg-blue-400 ${
+                      selectedRoomName?.roomName === room.roomName
+                        ? "bg-blue-500 text-white"
+                        : "text-white"
+                    }`}>
+                    <strong>{room.roomName}</strong>
+                    <span className="text-sm ml-2">
+                      ({room.participants?.length || 0} users)
+                    </span>
+                  </li>
+                ))
+              )}
+            </ul>
+          )}
+        </div>
+      </aside>
+    </>
   );
 }
 
