@@ -121,10 +121,8 @@ function Messages({ selectedRoom, user, setSelectedRoom, onJoinRoom }) {
     }
   };
 
-  /** ----------------- UI ------------------ **/
   return (
     <div className="flex flex-col h-[84vh] sm:h-[88vh] bg-gray-900 rounded-lg shadow-md p-3 sm:p-4">
-      {/* ---------- Messages container ---------- */}
       <div
         ref={containerRef}
         className="
@@ -189,7 +187,6 @@ function Messages({ selectedRoom, user, setSelectedRoom, onJoinRoom }) {
         )}
       </div>
 
-      {/* ---------- Input / Join Button ---------- */}
       <div className="mt-3">
         {hasJoined ? (
           <InputMessage
