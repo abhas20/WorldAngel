@@ -27,18 +27,18 @@ export default function Login() {
     try {
       const formData = new FormData(formRef.current);
       const filled = Object.fromEntries(formData.entries());
-      const response = await loginUser(filled);
       setLoading(true)
+      const response = await loginUser(filled);
   
      
-      if (response.status === 200) {
+      if (response?.status === 200) {
         const {user,refreshToken ,accessToken}=response.data.message
         // console.log(response.data)
         setAuth({accessToken,refreshToken,user})
         await fetchUser();
         navigate("/");
         toast("Login successful");
-        formRef.current.reset(); 
+        formRef.current?.reset(); 
       }
       else {
         toast(response.data?.message || "Login failed");
@@ -54,47 +54,56 @@ export default function Login() {
   };
 
  return (
-  <form onSubmit={formSubmit} ref={formRef}>
-    {isLoading?<Loader/>: <div className="flex items-center justify-center min-h-screen bg-black text-white px-4">
-      <div className="bg-gray-800 flex flex-col justify-center items-center w-full max-w-sm sm:max-w-md py-12 px-6 sm:py-16 sm:px-12 gap-y-6 border rounded-2xl border-amber-300 shadow-lg">
-        <h1 className="text-3xl font-bold">Login</h1>
+   <form onSubmit={formSubmit} ref={formRef} className="relative">
+     {isLoading && (
+       <div className="absolute inset-0 bg-black/70 flex items-center justify-center z-10">
+         <Loader />
+       </div>
+     )}
 
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          className="w-full border border-gray-300 p-3 rounded-md"
-          required
-        />
+     <div className="flex items-center justify-center min-h-screen bg-black text-white px-4">
+       <div className="bg-gray-800 flex flex-col justify-center items-center w-full max-w-sm sm:max-w-md py-12 px-6 sm:py-16 sm:px-12 gap-y-6 border rounded-2xl border-amber-300 shadow-lg">
+         <h1 className="text-3xl font-bold">Login</h1>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          className="w-full border border-gray-300 p-3 rounded-md"
-          required
-          autoComplete="off"
-        />
+         <input
+           type="text"
+           name="username"
+           placeholder="Username"
+           className="w-full border border-gray-300 p-3 rounded-md"
+           required
+         />
 
-        <button
-          type="submit"
-          className="w-full bg-sky-500 hover:bg-sky-600 text-white p-3 rounded-md font-semibold transition duration-300"
-        >
-          Login
-        </button>
+         <input
+           type="password"
+           name="password"
+           placeholder="Password"
+           className="w-full border border-gray-300 p-3 rounded-md"
+           required
+           autoComplete="off"
+         />
 
-        <div className="flex justify-center items-center mt-6 text-sm">
-          <p>Don't have an account?</p>
-          <NavLink
-            to="/signup"
-            className="text-blue-500 ml-2 hover:text-orange-300 font-medium"
-          >
-            Sign Up
-          </NavLink>
-        </div>
-      </div>
-    </div>}
-  </form>
-);
+         <button
+           type="submit"
+           disabled={isLoading}
+           className={`w-full p-3 rounded-md font-semibold transition duration-300
+              ${isLoading
+                ? 'bg-sky-400 cursor-not-allowed'
+                : 'bg-sky-500 hover:bg-sky-600'}
+            `}>
+           Login
+         </button>
+
+         <div className="flex justify-center items-center mt-6 text-sm">
+           <p>Don't have an account?</p>
+           <NavLink
+             to="/signup"
+             className="text-blue-500 ml-2 hover:text-orange-300 font-medium">
+             Sign Up
+           </NavLink>
+         </div>
+       </div>
+     </div>
+   </form>
+ );
 
 }

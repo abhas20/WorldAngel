@@ -97,7 +97,6 @@ function InputMessage({ selectedRoom, user, setMessages }) {
         px-3 sm:px-4 py-3 
         bg-gray-900 border-t border-gray-700
       ">
-      {/* Text Input */}
       <input
         type="text"
         value={message}
@@ -121,7 +120,6 @@ function InputMessage({ selectedRoom, user, setMessages }) {
         disabled={loading}
       />
 
-      {/* Upload button */}
       <button
         type="button"
         onClick={() => fileInputRef.current?.click()}
@@ -135,7 +133,6 @@ function InputMessage({ selectedRoom, user, setMessages }) {
         <FiPaperclip size={20} />
       </button>
 
-      {/* Send button */}
       <button
         type="submit"
         disabled={loading}
